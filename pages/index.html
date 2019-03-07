@@ -1,0 +1,300 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <title>Anglar js</title>
+</head>
+
+<body>
+
+  <div
+    ng-app="myApp"
+    ng-init="
+    firstName='beno';
+    color='red';
+    person={userO:'One',lastUser:'last'};
+    quontity='1';
+    price='2';
+    email='aba@yaho.com';
+    names=['fam', ' aba', 'test'];
+    lists=[
+           {name:'first', last:'sec'},
+           {name:'firs2', last:'sec2'}];"
+    ng-controller="myCtrl"
+    test-dirctive
+    >
+
+    <div>
+      <a href="#/!">Index</a>
+      <a href="#!about">About</a>
+      <div ng-view></div>
+    </div>
+
+
+    <!-- Start try ng-model and ng-bind -->
+    <p>Name:  <input type="text" ng-model="name"></p>
+     <span ng-bind="name"></span>
+     <p>{{name}}</p>
+
+
+     <!-- Try ng-init -->
+     <p ng-bind="firstName"></p>
+     <input
+      type="text"
+      ng-model="firstName"
+      style="background-color:{{color}}"
+      >
+
+      <input type="text" ng-model="quontity">
+      <input type="text" ng-model="price">
+
+
+     <p><span>{{quontity * price }} </span></p>
+
+     <!-- MAKE lOOP -->
+     <ul>
+       <li ng-repeat="x in names">
+         {{ x }}
+       </li>
+     </ul>
+
+
+     <!--  make loop with array -->
+     <ul>
+       <li ng-repeat="x in lists">
+         {{x.name + ' ' +  x.last}}
+       </li>
+     </ul>
+
+
+      <!--  use array-->
+      <p>User one {{person.userO}}</p>
+      <p>User wo {{person.lastUser}}</p>
+
+     <!-- try Controller -->
+     <p>First name : <input type="text" ng-model="firstName"></p>
+     <p>First name : <input type="text" ng-model="lastName"></p>
+     <span>{{firstName + " " + lastName}}</span>
+<br>
+     <input type="text" ng-model='day'>
+     <p>{{day}}</p>
+
+<test-dir></test-dir>
+
+
+
+
+    <!--Start Valid  -->
+<form action="" name="myform">
+
+  <p>Email: <input type="email" name="address" ng-model="text" ></p>
+  <span ng-show="myform.address.$error.email">not email please use @exampl.com</span>
+
+</form>
+
+
+<form action="" name="myform">
+  <p>Email2: <input type="email" name="addres2" ng-model="email"></p>
+
+  <p>{{myform.addres2.$valid}} (validated)</p>
+  <p>{{myform.addres2.$dirty}} (dirty)</p>
+  <p>{{myform.addres2.$touched}} (tuched)</p>
+
+</form>
+
+<form action="" name="myform3">
+enter your name :  <input type="text" name="myinput" ng-model="mytext" required>
+</form>
+
+
+
+<!-- Ues two controler ues function  -->
+ <div ng-controller="secControl">
+    <h1 ng-click="myChange()">{{one}}</h1>
+ </div>
+
+  <div ng-controller="thrControl">
+       <ul>
+         <li ng-repeat="x in names">
+           {{x.name + ' ' +  x.country}}
+         </li>
+        </ul>
+  </div>
+
+<input type="text" ng-model="firstName">
+<p>{{firstName}}</p>
+
+<p>{{color}}</p>
+
+
+<div ng-controller="filters">
+  <p>{{firstname1 | uppercase}}</p>
+  <p>{{firstname1 | lowercase}}</p>
+
+    <!-- Orderby -->
+    <ul>
+      <li ng-repeat="x in names | orderBy: 'country'">
+        {{x.name + ' ' + x.country}}
+      </li>
+    </ul>
+
+    <!-- currency -->
+    <p> {{price | currency}}</p>
+
+       <!-- filter by item-->
+       <ul>
+         <li ng-repeat="x in names | filter: 'm'">
+           {{x.name +  ' ' +  x.country}}
+         </li>
+       </ul>
+
+<!-- fiter in input search -->
+<input type="text" ng-model='test'>
+  <ul>
+    <li ng-repeat="x in names | filter: test">
+      {{x.name + ' ' + x.country}}
+    </li>
+  </ul>
+
+
+  <!-- service -->
+<div ng-controller="service">
+  <p> {{google.title}}</p>
+</div>
+
+
+<div ng-controller="http">
+  <input type="text" ng-model="test">
+  <ul>
+    <li ng-repeat="x in myusers | filter: test">
+      {{x.id + ' ' + x.name }}
+    </li>
+  </ul>
+</div>
+
+
+ <!-- select -->
+ <div ng-controller="select">
+    <select ng-model="selectCar" ng-options="x.name for x in cars">
+
+    </select>
+    <h1>Name: {{selectCar.name}}</h1>
+    <h1>Color: {{selectCar.color}}</h1>
+    <h1> Model: {{selectCar.model}}</h1>
+
+
+ </div>
+
+
+<!-- Events  -->
+<div ng-controller="events">
+  <button ng-click="count = count + 1 ">Count</button>
+  <p>{{count}}</p>
+
+
+  <button type="button" name="button" ng-click="toogle()">Toogle</button>
+      <div ng-show="showMe">
+      <h1>Menu</h1>
+      <p>pizza</p>
+      <p>pizza</p>
+      <p>pizza</p>
+      <p>pizza</p>
+</div>
+
+  </div>
+
+
+  <!-- Forms -->
+  <form>
+    <input type="checkbox" ng-model="myVar">
+  </form>
+  <h1 ng-show="myVar">
+    show Me Header
+  </h1>
+
+
+  <form >
+    <input type="radio" ng-model="myVar2" value="Dogs">Dogs
+    <input type="radio" ng-model="myVar2" value="Tutourias">Tutourias
+    <input type="radio" ng-model="myVar2" value="tuts">tuts
+  </form>
+
+  <div ng-switch="myVar2">
+    <div ng-switch-when="Dogs">
+      <h1>Dogs</h1>
+        <p>Gogs Gogs</p>
+    </div>
+    <div ng-switch-when="Tutourias">
+      <h1>Tutourias</h1>
+        <p>Tutourias Tutourias</p>
+    </div>
+    <div ng-switch-when="tuts">
+      <h1>tuts</h1>
+        <p>tuts tuts</p>
+    </div>
+  </div>
+
+
+
+  <select ng-model="myVar3">
+      <option value=""></option>
+    <option value="one">One</option>
+    <option value="two">two</option>
+    <option value="three">three</option>
+  </select>
+
+  <div ng-switch="myVar3">
+    <div ng-switch-when="one">
+      One
+    </div>
+    <div ng-switch-when="two">
+     two
+    </div>
+    <div ng-switch-when="three">
+      three
+    </div>
+  </div>
+
+
+  <div ng-controller="forms">
+    <form name="myform4">
+      <P>User Name</P>
+      <input type="text" name="name" ng-model="name" required>
+      <span style="color:#f00" ng-show="myform4.name.$dirty && myform4.name.$invalid">
+        <span ng-show="myform4.name.$error.required"> User is required</span>
+      </span>
+<br>
+<p>Email: </p>
+      <input type="email" name="email" ng-model="email" required>
+      <span ng-show=" myform4.email.$dirty && myform4.email.$invalid">
+        <span ng-show="myform4.email.$error.required">Email is required</span>
+        <span ng-show="myform4.email.$error.email">invalid email address</span>
+      </span>
+      <br><br>
+
+      <input type="submit" ng-disabled="myform4.name.$dirty && myform4.name.$invalid
+              || myform4.email.$dirty && myform4.email.$invalid ">
+    </form>
+  </div>
+
+  </div>
+  <script src="app.js"></script>
+<script src="route.js"></script>
+<script  src="contrllers.js"></script>
+<script>
+   
+     app.directive('testDir', function(){
+       return{
+         template: '<h1>Test Deirective</h1>'
+       }
+     })
+
+</script>
+</body>
+
+</html>

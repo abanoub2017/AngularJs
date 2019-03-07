@@ -1,0 +1,56 @@
+   <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <link rel="stylesheet" href="./style/home.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+            <title>table</title>
+        </head>
+        
+        
+        <body ng-app="myApp" >
+          <div class="container">
+              <h1 class="text-center">
+                  Table Ues Json
+              </h1>
+              <div class="text-center">
+                    <span>Search :</span>  <input type="text" class="form-control" ng-model="test" placeholder="Search">
+              
+              </div>
+              
+              <table ng-controller="table">
+                      <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                      </tr>
+                      <tr ng-repeat="x in users | filter : test">
+                        <td>{{x.name}}</td>
+                        <td>{{x.email}}</td>
+                        <td>{{x.address.city}}</td>
+                        
+                      </tr>
+                
+               </table>
+          </div>
+   
+    
+
+
+        <script>
+          
+        var app = angular.module('myApp',["ngRoute"]);
+
+        app.controller('table',function($scope,$http){
+        $http.get("https://jsonplaceholder.typicode.com/users")
+        .then(function(response){
+        $scope.users =response.data;
+        });
+
+        })
+        </script>
+            </body>
+        </html>
